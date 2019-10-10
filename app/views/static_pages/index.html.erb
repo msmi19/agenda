@@ -1,9 +1,29 @@
 <section class="agendaapp">
   <header class="header">
-    <h1>My Agenda</h1>
+    <h1>Agenda</h1>
   </header>
 
   <section class="main">
+    <ul class="my-agenda">
 
+    </ul>
   </section>
 </section>
+
+<script>
+  $(function() {
+    $.get("http://localhost:3030/tasks").success( function( data ) {
+      var htmlString = ""; 
+
+      $.each(data, function(index,task) {
+        var liElement = '<li><div class="view"><input class="toggle" type="checkbox"><label>' +
+          task.title +
+          '</label></div></li>';
+          htmlString += liElement;
+
+        });
+        var ulAgenda = $('.my-agenda');
+        ulAgenda.html(htmlString);
+    });
+  });
+</script>
